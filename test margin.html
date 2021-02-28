@@ -1,0 +1,46 @@
+<style>
+
+</style>
+<body>
+    <div id="root"></div>
+    <div style="position: relative; border: 10px solid black; padding: 20px; width: 500px; height: 500px;">
+        <div style="position: absolute; background-color: yellow; border: 10px solid black; left: 30px; right: 30px; height: 100px;">
+        </div>
+    </div>
+    
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        
+const app = Vue.createApp({
+
+    template: `
+        <div >torefs:{{show}} message:{{toastMessage}}</div>
+        <div @click="showToast('dadada')">点我</div>
+    `,
+
+    setup(props, context){
+
+        const { reactive, toRefs } = Vue;
+        const toastData = reactive({
+            show: false,
+            toastMessage: ''
+        })
+
+        const showToast = (message) => {
+            toastData.show = true
+            toastData.toastMessage = message
+        }
+
+        const { show, toastMessage } = toRefs(toastData)
+        
+        return { show, toastMessage, showToast }
+        
+    }
+});
+
+app.mount("#root");
+
+
+    </script>
+</body>
